@@ -1,0 +1,4 @@
+id,currency_from_id,currency_to_id,exchange_rate_from_to,exchange_rate_to_from,official_bank_rate,created_at
+1,1,2,0.856,1.254,1.054,TIMESTAMP WITH TIME ZONE '2023-11-15 11:30:00+00'
+2,2,3,0.905,1.138,0.995,TIMESTAMP WITH TIME ZONE '2023-11-15 11:30:00+00'
+3,1,3,0.985,1.038,1.020,TIMESTAMP WITH TIME ZONE '2023-11-15 11:30:00+00'

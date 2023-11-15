@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "rate_changes")
+@Table(name = "rate_updates")
 @Getter
 @Setter
 @Builder(toBuilder = true)
@@ -27,10 +27,10 @@ import lombok.Setter;
 public class RateUpdateEntity extends CreatableEntity {
   @Id
   @SequenceGenerator(
-      name = "rate_changes_sequence",
-      sequenceName = "rate_changes_sequence",
+      name = "rate_updates_sequence",
+      sequenceName = "rate_updates_sequence",
       allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rate_changes_sequence")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rate_updates_sequence")
   @Column(name = "id")
   private Long id;
 

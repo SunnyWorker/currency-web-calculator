@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="0010-insert-into-tables" author="Khotsin">
+        <loadData tableName="currencies"
+                  file="data/231115-currencies.csv"
+                  relativeToChangelogFile="true"
+                  commentLineStartsWith=""
+                  usePreparedStatements="true">
+        </loadData>
+
+        <loadData tableName="users"
+                  file="data/231115-users.csv"
+                  relativeToChangelogFile="true"
+                  commentLineStartsWith=""
+                  usePreparedStatements="true">
+        </loadData>
+
+        <loadData tableName="bank_accounts"
+                  file="data/231115-bank-accounts.csv"
+                  relativeToChangelogFile="true"
+                  commentLineStartsWith=""
+                  usePreparedStatements="true">
+        </loadData>
+
+        <loadData tableName="rate_updates"
+                  file="data/231115-rate-updates.csv"
+                  relativeToChangelogFile="true"
+                  commentLineStartsWith=""
+                  usePreparedStatements="true">
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

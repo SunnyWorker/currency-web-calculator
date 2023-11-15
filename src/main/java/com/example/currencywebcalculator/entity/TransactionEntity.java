@@ -39,12 +39,13 @@ public class TransactionEntity extends CreatableEntity {
   private UserEntity userEntity;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "exchange_rate_id", nullable = false)
-  private RateUpdateEntity rateUpdateEntity;
+  @JoinColumn(name = "currency_from_id", nullable = false)
+  private CurrencyEntity fromCurrencyEntity;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "currency_to_id", nullable = false)
+  private CurrencyEntity toCurrencyEntity;
 
   @Column(name = "given_money_amount", nullable = false)
   private BigDecimal givenMoneyAmount;
-
-  @Column(name = "received_money_amount", nullable = false)
-  private BigDecimal receivedMoneyAmount;
 }
