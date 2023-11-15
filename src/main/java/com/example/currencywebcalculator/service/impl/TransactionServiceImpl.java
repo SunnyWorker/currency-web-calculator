@@ -40,7 +40,7 @@ public class TransactionServiceImpl implements TransactionService {
       CreateTransactionRequestDto createTransactionRequestDto) {
     Map<String, CurrencyEntity> currencyEntityMap =
         currencyRepository.findAll().stream()
-            .collect(Collectors.toMap(CurrencyEntity::getName, CurrencyEntity::new));
+            .collect(Collectors.toMap(CurrencyEntity::getName, currencyEntity -> currencyEntity));
 
     validateCreateTransactionRequestDto(createTransactionRequestDto, currencyEntityMap.keySet());
 
@@ -72,7 +72,7 @@ public class TransactionServiceImpl implements TransactionService {
           rateUpdateDto.exchangeRateFromTo());
     }
 
-    if (rateUpdateDto.currencyFrom().equals(createTransactionRequestDto.currencyFrom())) {
+    if (rateUpdateDto.currencyFrom().equals(createTransactionRequestDto.currencyTo())) {
       calculateProfitAndSave(
           bankAccountEntityFrom,
           bankAccountEntityTo,

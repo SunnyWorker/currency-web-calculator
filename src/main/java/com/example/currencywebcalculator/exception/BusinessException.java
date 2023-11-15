@@ -20,6 +20,8 @@ public class BusinessException extends RuntimeException {
       "Such amount of money is not present on your balance (%s)";
   public static final String NO_RATE_UPDATE_FOR_CURRENCIES =
       "This currency does not have any rate (%s %s)";
+  public static final String NO_BANK_ACCOUNT_FOR_USER =
+      "User with such id does not have a bank account (%s)";
   private final HttpStatus httpStatus;
 
   public BusinessException(final HttpStatus httpStatus, final String message) {
