@@ -19,7 +19,6 @@ public class CurrencyController {
   public static final String API_V1_URI = "/api/v1";
   public static final String CURRENCY_URI = "/currencies";
   public static final String CURRENCY_URL = API_V1_URI + CURRENCY_URI;
-  public static final String CURRENCY_NAME_URI = "/{currencyName}";
 
   private final CurrencyService currencyService;
 

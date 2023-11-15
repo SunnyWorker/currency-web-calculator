@@ -3,6 +3,7 @@ package com.example.currencywebcalculator.service.impl;
 import com.example.currencywebcalculator.exception.BusinessException;
 import com.example.currencywebcalculator.service.ValidationService;
 import java.math.BigDecimal;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,14 @@ public class ValidationServiceImpl implements ValidationService {
       throw new BusinessException(
           HttpStatus.BAD_REQUEST,
           BusinessException.CURRENCIES_MUST_BE_DIFFERENT.formatted(currencyFrom));
+    }
+  }
+
+  @Override
+  public void checkIfCurrencyExists(Set<String> currencyNames, String currencyName) {
+    if (!currencyNames.contains(currencyName)) {
+      throw new BusinessException(
+          HttpStatus.BAD_REQUEST, BusinessException.CURRENCY_NOT_EXISTS.formatted(currencyName));
     }
   }
 }

@@ -14,6 +14,12 @@ public class BusinessException extends RuntimeException {
       "The name of currency must only contain characters (%s)";
   public static final String CURRENCIES_MUST_BE_DIFFERENT =
       "Currency_from and currency_to must be different (%s)";
+  public static final String CURRENCY_NOT_EXISTS = "Such currency does not exists (%s)";
+  public static final String USER_NOT_EXISTS = "User with such id does not exists (%s)";
+  public static final String NOT_ENOUGH_MONEY =
+      "Such amount of money is not present on your balance (%s)";
+  public static final String NO_RATE_UPDATE_FOR_CURRENCIES =
+      "This currency does not have any rate (%s %s)";
   private final HttpStatus httpStatus;
 
   public BusinessException(final HttpStatus httpStatus, final String message) {
