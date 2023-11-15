@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class ValidationServiceImpl implements ValidationService {
   @Override
   public void validateAmount(BigDecimal amount) {
-    if (amount.compareTo(BigDecimal.ONE) < 0) {
+    if (amount.compareTo(BigDecimal.ZERO) < 0) {
       throw new BusinessException(
           HttpStatus.BAD_REQUEST, BusinessException.AMOUNT_MUST_BE_POSITIVE);
     }
@@ -22,17 +22,20 @@ public class ValidationServiceImpl implements ValidationService {
   public void validateCurrency(String currencyName) {
     if (currencyName.trim().isEmpty()) {
       throw new BusinessException(
-          HttpStatus.BAD_REQUEST, BusinessException.CURRENCY_NAME_MUST_BE_NON_EMPTY);
+          HttpStatus.BAD_REQUEST,
+          BusinessException.CURRENCY_NAME_MUST_BE_NON_EMPTY.formatted(currencyName));
     }
 
     for (int i = 0; i < currencyName.length(); i++) {
       if (Character.isLowerCase(currencyName.charAt(i)))
         throw new BusinessException(
-            HttpStatus.BAD_REQUEST, BusinessException.CURRENCY_NAME_MUST_BE_UPPER_CASE);
+            HttpStatus.BAD_REQUEST,
+            BusinessException.CURRENCY_NAME_MUST_BE_UPPER_CASE.formatted(currencyName));
 
       if (!Character.isLetter(currencyName.charAt(i))) {
         throw new BusinessException(
-            HttpStatus.BAD_REQUEST, BusinessException.CURRENCY_NAME_MUST_ONLY_CONTAIN_CHARACTERS);
+            HttpStatus.BAD_REQUEST,
+            BusinessException.CURRENCY_NAME_MUST_ONLY_CONTAIN_CHARACTERS.formatted(currencyName));
       }
     }
   }
@@ -41,7 +44,8 @@ public class ValidationServiceImpl implements ValidationService {
   public void validateCurrencies(String currencyFrom, String currencyTo) {
     if (currencyFrom.equals(currencyTo)) {
       throw new BusinessException(
-          HttpStatus.BAD_REQUEST, BusinessException.CURRENCIES_MUST_BE_DIFFERENT);
+          HttpStatus.BAD_REQUEST,
+          BusinessException.CURRENCIES_MUST_BE_DIFFERENT.formatted(currencyFrom));
     }
   }
 }

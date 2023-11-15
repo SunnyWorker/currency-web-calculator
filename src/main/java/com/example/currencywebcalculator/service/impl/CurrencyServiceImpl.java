@@ -47,7 +47,7 @@ public class CurrencyServiceImpl implements CurrencyService {
         .forEach(
             updateCurrencyRequestDto -> {
               validateUpdateCurrencyRequestDto(updateCurrencyRequestDto);
-              if (currencyEntityMap.containsKey(updateCurrencyRequestDto.currencyFrom())) {
+              if (!currencyEntityMap.containsKey(updateCurrencyRequestDto.currencyFrom())) {
                 absentCurrenciesNames.add(updateCurrencyRequestDto.currencyFrom());
                 currencyEntityMap.put(
                     updateCurrencyRequestDto.currencyFrom(),
@@ -57,7 +57,7 @@ public class CurrencyServiceImpl implements CurrencyService {
                             .build()));
               }
 
-              if (currencyEntityMap.containsKey(updateCurrencyRequestDto.currencyTo())) {
+              if (!currencyEntityMap.containsKey(updateCurrencyRequestDto.currencyTo())) {
                 absentCurrenciesNames.add(updateCurrencyRequestDto.currencyTo());
                 currencyEntityMap.put(
                     updateCurrencyRequestDto.currencyTo(),
