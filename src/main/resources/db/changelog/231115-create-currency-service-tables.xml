@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="0001-create-sequence-for-currencies-table" author="Khotsin">
+        <createSequence
+                sequenceName="currencies_sequence"
+                dataType="bigint"
+                startValue="1"/>
+    </changeSet>
+
+    <changeSet id="0002-create-currencies-table" author="Khotsin">
+        <createTable tableName="currencies">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0003-create-sequence-for-users-table" author="Khotsin">
+        <createSequence
+                sequenceName="users_sequence"
+                dataType="bigint"
+                startValue="1"/>
+    </changeSet>
+
+    <changeSet id="0004-create-users-table" author="Khotsin">
+        <createTable tableName="users">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="first_name" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birth_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0005-create-bank-accounts-table" author="Khotsin">
+        <createTable tableName="bank_accounts">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_user_to_bank_account" references="users(id)" primaryKey="true"/>
+            </column>
+            <column name="currency_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_currency_to_bank_account" references="currencies(id)" primaryKey="true"/>
+            </column>
+            <column name="balance" type="numeric">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0006-create-sequence-for-rate-updates-table" author="Khotsin">
+        <createSequence
+                sequenceName="rate_updates_sequence"
+                dataType="bigint"
+                startValue="1"/>
+    </changeSet>
+
+    <changeSet id="0007-create-rate-updates-table" author="Khotsin">
+        <createTable tableName="rate_updates">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="currency_from_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_currencyFrom_to_rate_update" references="currencies(id)"/>
+            </column>
+            <column name="currency_to_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_currencyTo_to_rate_update" references="currencies(id)"/>
+            </column>
+            <column name="exchange_rate_from_to" type="numeric">
+                <constraints nullable="false"/>
+            </column>
+            <column name="exchange_rate_to_from" type="numeric">
+                <constraints nullable="false"/>
+            </column>
+            <column name="official_bank_rate" type="numeric">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp with time zone">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0008-create-sequence-for-transactions-table" author="Khotsin">
+        <createSequence
+                sequenceName="transactions_sequence"
+                dataType="bigint"
+                startValue="1"/>
+    </changeSet>
+
+    <changeSet id="009-create-transactions-table" author="Khotsin">
+        <createTable tableName="transactions">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_user_to_transaction" references="users(id)"/>
+            </column>
+            <column name="currency_from_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_currencyFrom_to_transaction" references="currencies(id)"/>
+            </column>
+            <column name="currency_to_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_currencyTo_to_transaction" references="currencies(id)"/>
+            </column>
+            <column name="given_money_amount" type="numeric">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp with time zone">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
