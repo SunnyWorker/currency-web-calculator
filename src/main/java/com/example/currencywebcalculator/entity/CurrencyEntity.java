@@ -30,6 +30,8 @@ public class CurrencyEntity {
   @Column(name = "id")
   private Long id;
 
-  @Column(name = "name", nullable = false)
+  @Column(name = "name", nullable = false, unique = true)
   private String name;
+
+  public CurrencyEntity(CurrencyEntity currencyEntity) {}
 }
